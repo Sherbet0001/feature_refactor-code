@@ -51,14 +51,14 @@ public class PersonalTaskManagerViolations {
      * @param priorityLevel Mức độ ưu tiên ("Thấp", "Trung bình", "Cao").
      * @param isRecurring Boolean có phải là nhiệm vụ lặp lại không.
      * @return JSONObject của nhiệm vụ đã thêm, hoặc null nếu có lỗi.
-     */
+     **/
     public JSONObject addNewTaskWithViolations(String title, String description,
                                                 String dueDateStr, String priorityLevel,
                                                 boolean isRecurring) {
 
-        if (title == null || title.trim().isEmpty()) {
-            System.out.println("Lỗi: Tiêu đề không được để trống.");
-            return null;
+        if (!isValidTitle(title)) {
+            System.out.println("Tiêu đề không được để trống!");
+            return;
         }
         if (dueDateStr == null || dueDateStr.trim().isEmpty()) {
             System.out.println("Lỗi: Ngày đến hạn không được để trống.");
@@ -82,6 +82,9 @@ public class PersonalTaskManagerViolations {
         if (!isValidPriority) {
             System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ. Vui lòng chọn từ: Thấp, Trung bình, Cao.");
             return null;
+        }
+        private boolean isValidTitle(String title) {
+            return title != null && !title.trim().isEmpty();
         }
 
         // Tải dữ liệu
